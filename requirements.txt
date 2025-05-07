@@ -61,6 +61,7 @@ fsspec==2024.12.0
 fugue==0.9.1
 fuzzywuzzy==0.18.0
 gast==0.6.0
+geopandas==1.0.1
 gluonts==0.16.0
 google-pasta==0.2.0
 greenlet==3.1.1
@@ -100,6 +101,7 @@ jupyterlab==4.3.4
 jupyterlab_pygments==0.3.0
 jupyterlab_server==2.27.3
 jupyterlab_widgets==3.0.13
+kagglehub==0.3.12
 keras==3.7.0
 kiwisolver==1.4.7
 lazy_loader==0.4
@@ -188,7 +190,9 @@ pydantic_core==2.27.2
 Pygments==2.18.0
 pylev==1.4.0
 pyod==2.0.3
+pyogrio==0.10.0
 pyparsing==3.2.0
+pyproj==3.7.1
 pysimdjson==6.0.2
 pystan==3.10.0
 python-dateutil==2.9.0.post0
@@ -215,6 +219,7 @@ seasonal==0.3.1
 Send2Trash==1.8.3
 setuptools==75.7.0
 shap==0.46.0
+shapely==2.1.0
 six==1.17.0
 skforecast==0.13.0
 skpro==2.8.0
