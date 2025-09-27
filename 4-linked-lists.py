@@ -461,6 +461,138 @@ class TwoWayLinkedList:
                 
 ## Cyclic List ##
 
+class CircularNode:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+        
+    def display_node(self):
+        print(self.data, end=' ')
+        
+class CircularLinkedList:
+    def __init__(self):
+        self.head = None
+        
+    def display(self):
+        elements = []
+        if self.head is None:
+            return elements
+        
+        itr = self.head
+        while True:
+            elements.append(itr.data)
+            itr = itr.next
+            if itr == self.head:
+                break
+        return elements
+    
+    def insert_beg(self, data):
+        node = CircularNode(data)
+        if self.head is None:
+            self.head = node
+            node.next = node
+        else:
+            itr = self.head
+            while itr.next != self.head:
+                itr = itr.next
+            node.next = self.head
+            itr.next = node
+            self.head = node
+            
+    def insert_end(self, data):
+        node = CircularNode(data)
+        if self.head is None:
+            self.head = node
+            node.next = node
+        else:
+            itr = self.head
+            while itr.next != self.head:
+                itr = itr.next
+            itr.next = node
+            node.next = self.head
+            
+    def insert_after(self, key, data):
+        if self.head is None:
+            print('List is Empty')
+            return
+        itr = self.head
+        while itr:
+            if itr.data == key:
+                node = CircularNode(data)
+                node.next = itr.next
+                itr.next = node
+                return
+            itr = itr.next
+            if itr == self.head:
+                print(f"Key {key} not found")
+                break
+            
+    def delete_beg(self):
+        if self.head is None:
+            print("List is empty")
+            return
+        if self.head.next == self.head:
+            self.head = None
+        else:
+            itr = self.head
+            while itr.next != self.head:
+                itr = itr.next
+            itr.next = self.head.next
+            self.head = self.head.next
+            
+    def delete_end(self):
+        if self.head is None:
+            print('List is Empty')
+            return
+        if self.head.next == self.head:
+            self.head = None
+        else:
+            itr = self.head
+            prev = None
+            while itr.next != self.head:
+                prev = itr
+                itr = itr.next
+            prev.next = self.head
+            
+    def delete_after(self, key):
+        if self.head is None:
+            print('List is Empty')
+            return
+        itr = self.head
+        while itr:
+            if itr.data == key:
+                if itr.next == self.head:
+                    print("No node exists after the given key")
+                    return
+                else:
+                    itr.next = itr.next.next
+                    return
+            itr = itr.next
+            if itr == self.head:
+                print(f"Key {key} not found")
+                break
+            
+cll = CircularLinkedList()
+
+cll.insert_at_end(10)
+cll.insert_at_end(20)
+cll.insert_at_end(30)
+cll.insert_at_end(40)
+print("Initial List:", cll.display())
+cll.insert_at_begin(5)
+print("After Insertion at Beginning:", cll.display())
+cll.insert_at_end(50)
+print("After Insertion at End:", cll.display())
+cll.insert_after(20, 25)
+print("After Insertion After 20:", cll.display())
+cll.delete_at_begin()
+print("After Deletion at Beginning:", cll.display())
+cll.delete_at_end()
+print("After Deletion at End:", cll.display())
+cll.delete_after(25)
+print("After Deletion After 25:", cll.display())
+
+
 class StackNode:
     def __init__(self, data):
         self.data = data
