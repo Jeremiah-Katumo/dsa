@@ -466,7 +466,6 @@ class Node:
         self.prev = None
         self.next = None
 
-# Doubly Linked List class
 class DoublyLinkedList:
     def __init__(self):
         self.head = None
@@ -573,9 +572,6 @@ class DoublyLinkedList:
         if itr.prev:
             itr.prev.next = itr.next
 
-# -------------------
-# Example Usage
-# -------------------
 dll = DoublyLinkedList()
 dll.insert_end(10)
 dll.insert_end(20)
@@ -726,6 +722,7 @@ print("After Deletion at End:", cll.display())
 cll.delete_after(25)
 print("After Deletion After 25:", cll.display())
 
+## Stacks ##
 
 class StackNode:
     def __init__(self, data):
@@ -769,7 +766,64 @@ class StackList:
             temp1 = ptr.next.data
             ptr.next = None
             return temp1
-            
+        
+
+class Stack:
+    def __init__(self, capacity):
+        self.capacity = capacity
+        self.stack = []
+    
+    # a. PUSH
+    def push(self, data):
+        if len(self.stack) == self.capacity:
+            print("Stack Overflow!")
+            return
+        self.stack.append(data)
+        print(f"Pushed: {data}")
+    
+    # b. POP
+    def pop(self):
+        if self.is_empty():
+            print("Stack Underflow!")
+            return None
+        return self.stack.pop()
+    
+    # c. PEEK
+    def peek(self):
+        if self.is_empty():
+            print("Stack is empty!")
+            return None
+        return self.stack[-1]
+    
+    # d. isEmpty
+    def is_empty(self):
+        return len(self.stack) == 0
+    
+    # e. isFull
+    def is_full(self):
+        return len(self.stack) == self.capacity
+    
+    # Display stack
+    def display(self):
+        if self.is_empty():
+            print("Stack is empty")
+        else:
+            print("Stack (top -> bottom):", self.stack[::-1])
+
+s = Stack(5)
+s.push(10)
+s.push(20)
+s.push(30)
+s.display()
+print("Top element:", s.peek())
+print("Popped:", s.pop())
+s.display()
+s.push(40)
+s.push(50)
+s.push(60)
+s.push(70)  # Will show overflow
+s.display()
+         
 
 class QueueNode:
     def __init__(self, data):
@@ -846,3 +900,60 @@ class QueueList:
             else:
                 print('Cycle')
                 break
+            
+
+class Queue:
+    def __init__(self, capacity):
+        self.capacity = capacity
+        self.queue = []
+    
+    # a. ENQUEUE
+    def enqueue(self, data):
+        if self.is_full():
+            print("Queue Overflow!")
+            return
+        self.queue.append(data)
+        print(f"Enqueued: {data}")
+    
+    # b. DEQUEUE
+    def dequeue(self):
+        if self.is_empty():
+            print("Queue Underflow!")
+            return None
+        return self.queue.pop(0)
+    
+    # c. PEEK (Front element)
+    def peek(self):
+        if self.is_empty():
+            print("Queue is empty!")
+            return None
+        return self.queue[0]
+    
+    # d. isEmpty
+    def is_empty(self):
+        return len(self.queue) == 0
+    
+    # e. isFull
+    def is_full(self):
+        return len(self.queue) == self.capacity
+    
+    # Display queue
+    def display(self):
+        if self.is_empty():
+            print("Queue is empty")
+        else:
+            print("Queue (front -> rear):", self.queue)
+
+q = Queue(5)
+q.enqueue(10)
+q.enqueue(20)
+q.enqueue(30)
+q.display()
+print("Front element:", q.peek())
+print("Dequeued:", q.dequeue())
+q.display()
+q.enqueue(40)
+q.enqueue(50)
+q.enqueue(60)
+q.enqueue(70)  # Overflow
+q.display()
