@@ -457,7 +457,141 @@ class TwoWayLinkedList:
                     temp1 = ptr1.data
                     ptr.next = ptr2
                     return temp1
+             
                 
+# Node class for Doubly Linked List
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.prev = None
+        self.next = None
+
+# Doubly Linked List class
+class DoublyLinkedList:
+    def __init__(self):
+        self.head = None
+
+    # Display list forward
+    def display(self):
+        if self.head is None:
+            print("List is empty")
+            return
+        itr = self.head
+        llstr = ""
+        while itr:
+            llstr += str(itr.data) + " <--> "
+            itr = itr.next
+        llstr += "None"
+        print(llstr)
+
+    def insert_beg(self, data):
+        node = Node(data)
+        if self.head is None:
+            self.head = node
+            return
+        node.next = self.head
+        self.head.prev = node
+        self.head = node
+
+    def insert_end(self, data):
+        node = Node(data)
+        if self.head is None:
+            self.head = node
+            return
+        itr = self.head
+        while itr.next:
+            itr = itr.next
+        itr.next = node
+        node.prev = itr
+
+    def insert_at(self, pos, data):
+        if pos < 0:
+            raise Exception("Invalid position")
+
+        if pos == 0:
+            self.insert_beg(data)
+            return
+
+        itr = self.head
+        count = 0
+        while itr and count < pos - 1:
+            itr = itr.next
+            count += 1
+        if itr is None:
+            raise Exception("Position out of range")
+
+        node = Node(data)
+        node.next = itr.next
+        node.prev = itr
+        if itr.next:
+            itr.next.prev = node
+        itr.next = node
+
+    def delete_beg(self):
+        if self.head is None:
+            print("List is empty")
+            return
+        if self.head.next is None:
+            self.head = None
+            return
+        self.head = self.head.next
+        self.head.prev = None
+
+    def delete_end(self):
+        if self.head is None:
+            print("List is empty")
+            return
+        if self.head.next is None:
+            self.head = None
+            return
+        itr = self.head
+        while itr.next:
+            itr = itr.next
+        itr.prev.next = None
+
+    def delete_at(self, pos):
+        if self.head is None:
+            print("List is empty")
+            return
+        if pos < 0:
+            raise Exception("Invalid position")
+
+        if pos == 0:
+            self.delete_beg()
+            return
+
+        itr = self.head
+        count = 0
+        while itr and count < pos:
+            itr = itr.next
+            count += 1
+        if itr is None:
+            raise Exception("Position out of range")
+
+        if itr.next:
+            itr.next.prev = itr.prev
+        if itr.prev:
+            itr.prev.next = itr.next
+
+# -------------------
+# Example Usage
+# -------------------
+dll = DoublyLinkedList()
+dll.insert_end(10)
+dll.insert_end(20)
+dll.insert_end(30)
+dll.display()
+dll.insert_beg(5)
+dll.display()
+dll.insert_at(2, 15)  # Insert 15 at position 2
+dll.display()
+dll.delete_beg()
+dll.display()
+dll.delete_end()
+dll.display()
+dll.delete_at(1)  # Delete element at position 1
+dll.display()
+             
                 
 ## Cyclic List ##
 
@@ -478,7 +612,7 @@ class CircularLinkedList:
         if self.head is None:
             return elements
         
-        itr = self.head
+        itr = self.head     # initialize a pointer
         while True:
             elements.append(itr.data)
             itr = itr.next
@@ -487,13 +621,13 @@ class CircularLinkedList:
         return elements
     
     def insert_beg(self, data):
-        node = CircularNode(data)
-        if self.head is None:
-            self.head = node
-            node.next = node
+        node = CircularNode(data)  # create a new node
+        if self.head is None:  # if list is empty:
+            self.head = node   # make head = node
+            node.next = node   # point node.next to itself
         else:
             itr = self.head
-            while itr.next != self.head:
+            while itr.next != self.head:  # treverse to the last node
                 itr = itr.next
             node.next = self.head
             itr.next = node
@@ -508,19 +642,19 @@ class CircularLinkedList:
             itr = self.head
             while itr.next != self.head:
                 itr = itr.next
-            itr.next = node
-            node.next = self.head
+            itr.next = node         # insert the new node
+            node.next = self.head   # point address of new/last node to head
             
     def insert_after(self, key, data):
-        if self.head is None:
-            print('List is Empty')
+        if self.head is None:       # if list is empty
+            print('Underflow')
             return
         itr = self.head
         while itr:
             if itr.data == key:
                 node = CircularNode(data)
-                node.next = itr.next
-                itr.next = node
+                node.next = itr.next      # set node.next to pointer.next
+                itr.next = node           # point the pointer.next to the new node
                 return
             itr = itr.next
             if itr == self.head:
@@ -529,20 +663,20 @@ class CircularLinkedList:
             
     def delete_beg(self):
         if self.head is None:
-            print("List is empty")
+            print("Underflow")
             return
-        if self.head.next == self.head:
+        if self.head.next == self.head:   # if the list has a single node
             self.head = None
         else:
             itr = self.head
-            while itr.next != self.head:
+            while itr.next != self.head:  # traverse to the last node in cyclic list
                 itr = itr.next
             itr.next = self.head.next
             self.head = self.head.next
             
     def delete_end(self):
         if self.head is None:
-            print('List is Empty')
+            print('Underflow')
             return
         if self.head.next == self.head:
             self.head = None
@@ -556,7 +690,7 @@ class CircularLinkedList:
             
     def delete_after(self, key):
         if self.head is None:
-            print('List is Empty')
+            print('Underflow')
             return
         itr = self.head
         while itr:
