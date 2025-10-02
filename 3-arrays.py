@@ -665,3 +665,45 @@ def find_missing_hash(arr, n):
             return i
 
 print(find_missing_hash([1,2,3,5], 5))  # Missing 4
+
+
+
+def split_text_into_chunks(text, max_words):
+    # Split text into sentences by full stop (keeping the dot)
+    sentences = [s.strip() + '.' for s in text.split('.') if s.strip()]
+    chunks = []
+    current_chunk = []
+    current_word_count = 0
+
+    for sentence in sentences:
+        words_in_sentence = len(sentence.split())
+        # If adding this sentence exceeds the limit
+        if current_word_count + words_in_sentence > max_words:
+            # Save the current chunk
+            chunks.append(" ".join(current_chunk).strip())
+            # Start a new chunk
+            current_chunk = [sentence]
+            current_word_count = words_in_sentence
+        else:
+            # Add sentence to current chunk
+            current_chunk.append(sentence)
+            current_word_count += words_in_sentence
+    # Add the last chunk if not empty
+    if current_chunk:
+        chunks.append(" ".join(current_chunk).strip())
+
+    return chunks
+
+
+# Example usage
+if __name__ == "__main__":
+    sample_text = """Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.
+    Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.
+    Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.
+    Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos."""
+    
+    chunks = split_text_into_chunks(sample_text, max_words=100)
+    
+    for i, chunk in enumerate(chunks, 1):
+        print(f"\n--- Chunk {i} ({len(chunk.split())} words) ---\n")
+        print(chunk)
