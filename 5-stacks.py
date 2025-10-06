@@ -1,3 +1,5 @@
+## SImp;e Stack Implimentation ##
+
 def push(S, item, top, MAX):
     if top==MAX-1:
         print("Overflow")
@@ -7,7 +9,7 @@ def push(S, item, top, MAX):
         S.append(item)
         return top
     
-def pop(S, top, MAX):
+def pop(S, top):
     if top==-1:
         return (-1, -1)
     else:
