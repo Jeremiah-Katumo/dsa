@@ -15,8 +15,8 @@ def enqueue(Q, front, rear, MAX, item):
         return rear, front
         
 def dequeue(Q, front, rear):
-    if front == -1 and rear == -1:
-        print("Queue Overflow")
+    if front == -1:
+        print("Queue Underflow")
         return (-1, -1, -1)
     elif front == rear:
         temp = Q[front]
