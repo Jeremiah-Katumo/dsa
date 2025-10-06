@@ -1,20 +1,20 @@
 ## SImp;e Stack Implimentation ##
 
 def push(S, item, top, MAX):
-    if top==MAX-1:
+    if top == MAX-1:
         print("Overflow")
         return top
     else:
-        top+=1
+        top += 1
         S.append(item)
         return top
     
 def pop(S, top):
-    if top==-1:
+    if top == -1:
         return (-1, -1)
     else:
-        temp=S[top]
-        top-=1
+        temp = S[top]
+        top -= 1
         del S[-1]
         return (temp, top)
     
