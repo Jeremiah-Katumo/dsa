@@ -1,4 +1,5 @@
 ## Simple Queue Implementation ##
+
 def enqueue(Q, front, rear, MAX, item):
     if rear == MAX-1:
         print("Queue Overflow")
@@ -13,7 +14,7 @@ def enqueue(Q, front, rear, MAX, item):
         Q[rear] = item   # Insert item at rear Q.append(item)
         return rear, front
         
-def dequeue(Q, front, rear, MAX):
+def dequeue(Q, front, rear):
     if front == -1 and rear == -1:
         print("Queue Overflow")
         return (-1, -1, -1)
@@ -94,6 +95,7 @@ def display(Q, front, rear, MAX):
     
 
 ## Circular Queue Implementation ##
+
 def circular_enqueue(item, Q, front, rear, MAX):
     if front == -1 and rear == -1:
         front = 0
@@ -125,6 +127,7 @@ def circular_dequeue(Q, front, rear, MAX):
     
 
 ## Priority Queue Implementation ##
+
 def priority_enqueue(item, Q, front, rear, MAX):
     if (rear + 1) % MAX == front:
         print("Queue Overflow")
@@ -153,6 +156,7 @@ def priority_enqueue(item, Q, front, rear, MAX):
                 
 
 ## Scheduling using Priority Queue ##
+
 def priority_dequeue(Q, front, rear, MAX):
     if front == -1:
         print("Queue Underflow")
@@ -168,6 +172,7 @@ def priority_dequeue(Q, front, rear, MAX):
         return (item, front, rear)
     
 ## Double Ended Queue Implementation ##
+
 def deque_enqueue_front(item, Q, front, rear, MAX):
     if (rear + 1) % MAX == front:
         print("Queue Overflow")
@@ -227,6 +232,7 @@ def deque_dequeue_rear(Q, front, rear, MAX):
         return (item, front, rear)
     
 ## Stack and queue using DEQueue ##
+
 def stack_push(item, Q, front, rear, MAX):
     return deque_enqueue_rear(item, Q, front, rear, MAX)
         
@@ -241,6 +247,7 @@ def queue_dequeue(Q, front, rear, MAX):
 
 
 ## Generating Binary Numbers using Queue ##
+
 from collections import deque
 
 def recursive_binary(n, current=""):
@@ -284,6 +291,7 @@ print(queue_binary(5))
 
 
 ## Stack using two queues ##
+
 # 1. Make push operation costly
 class StackUsingQueues: 
     def __init__(self):
@@ -354,6 +362,7 @@ class StackUsingQueuesPopCostly:
     
     
 ## Stack using single queue ##
+
 class StackUsingSingleQueue:
     def __init__(self):
         self.q = deque()
@@ -377,6 +386,7 @@ class StackUsingSingleQueue:
         return len(self.q) == 0
     
 ## Stack using single queue (Alternative Method) ##
+
 class StackUsingSingleQueue:
     def __init__(self):
         self.q = deque()
@@ -403,6 +413,7 @@ class StackUsingSingleQueue:
 
 
 ## Scheduling using Queue ##
+
 def round_robin(processes, burst_time, quantum):
     queue = deque(processes)
     remaining = dict(zip(processes, burst_time))
