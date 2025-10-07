@@ -155,7 +155,7 @@ def pop2(top2, size, stack):
         return top2, None
     item = stack[top2]
     stack[top2] = None
-    top2 -= 1
+    top2 += 1
     return top2, item
 
 def display(stack):
@@ -253,51 +253,6 @@ ts.display()
 print("Popped from Stack 1:", ts.pop1())
 print("Popped from Stack 2:", ts.pop2())
 ts.display()
-
-
-class TwoStacks:
-    def __init__(self, size):
-        self.size = size
-        self.arr = [None] * size
-        self.top1 = -1              # Stack1 starts from left
-        self.top2 = size            # Stack2 starts from right
-    
-    def push1(self, x):
-        if self.top1 < self.top2 - 1:
-            self.top1 += 1
-            self.arr[self.top1] = x
-        else:
-            print("Stack Overflow in Stack1!")
-    
-    def push2(self, x):
-        if self.top1 < self.top2 - 1:
-            self.top2 -= 1
-            self.arr[self.top2] = x
-        else:
-            print("Stack Overflow in Stack2!")
-    
-    def pop1(self):
-        if self.top1 >= 0:
-            x = self.arr[self.top1]
-            self.top1 -= 1
-            return x
-        else:
-            print("Stack1 Underflow!")
-            return None
-    
-    def pop2(self):
-        if self.top2 < self.size:
-            x = self.arr[self.top2]
-            self.top2 += 1
-            return x
-        else:
-            print("Stack2 Underflow!")
-            return None
-    
-    def display(self):
-        print("Stack1:", self.arr[:self.top1+1])
-        print("Stack2:", self.arr[self.top2:])
-        print("Full Array:", self.arr)
         
         
 ## Postfix Expression Evaluation using Stack ##
@@ -390,7 +345,7 @@ def infix_to_postfix(expr):
     stack = []
     prec = {'+':1, '-':1, '*':2, '/':2, '^':3}
     assoc = {'+':'L', '-':'L', '*':'L', '/':'L', '^':'R'}
-
+    # Scan each token in the expression
     for tok in tokens:
         if is_operand(tok):
             output.append(tok)
@@ -400,7 +355,7 @@ def infix_to_postfix(expr):
             while stack and stack[-1] != '(':
                 output.append(stack.pop())
             if stack and stack[-1] == '(':
-                stack.pop()
+                stack.pop()  # Remove '('
             else:
                 raise ValueError("Mismatched parentheses")
         else:  # operator
@@ -428,9 +383,9 @@ def infix_to_prefix(expr):
             rev.append('(')
         else:
             rev.append(t)
-    rev_expr = ' '.join(rev)
-    post = infix_to_postfix(rev_expr)
-    prefix = ' '.join(post.split()[::-1])
+    rev_expr = ''.join(rev)
+    post = infix_to_postfix(rev_expr)  # get postfix of reversed expression
+    prefix = ' '.join(post.split()[::-1])  # reverse postfix to get prefix
     return prefix
 
 # 3. Evaluate Postfix 
