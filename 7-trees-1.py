@@ -219,6 +219,90 @@ class BinarySearchTree:
             print(root.key, end=" ")
             self.preorder(root.left)
             self.preorder(root.right)
+            
+            
+## Implement alternative to Binary Tree Traversal using Recursion and Iteration ##
+class Node:
+    def __init__(self, key):
+        self.key = key
+        self.left = None
+        self.right = None
+
+class BinaryTree:
+    def __init__(self):
+        self.root = None
+
+    # Inorder Traversal (Left → Root → Right)
+    def inorder_recursive(self, root):
+        if root:
+            self.inorder_recursive(root.left)
+            print(root.key, end=" ")
+            self.inorder_recursive(root.right)
+
+    # Preorder Traversal (Root → Left → Right)
+    def preorder_recursive(self, root):
+        if root:
+            print(root.key, end=" ")
+            self.preorder_recursive(root.left)
+            self.preorder_recursive(root.right)
+
+    # Postorder Traversal (Left → Right → Root)
+    def postorder_recursive(self, root):
+        if root:
+            self.postorder_recursive(root.left)
+            self.postorder_recursive(root.right)
+            print(root.key, end=" ")
+
+# Iterative Traversals
+def inorder_iterative(self, root):
+    stack = []
+    current = root
+
+    while True:
+        # Reach the leftmost node
+        if current:
+            stack.append(current)
+            current = current.left
+        elif stack:
+            current = stack.pop()
+            print(current.key, end=" ")
+            current = current.right
+        else:
+            break
+        
+def preorder_iterative(self, root):
+    if root is None:
+        return
+    stack = [root]
+
+    while stack:
+        current = stack.pop()
+        print(current.key, end=" ")
+        # Push right child first so that left is processed first
+        if current.right:
+            stack.append(current.right)
+        if current.left:
+            stack.append(current.left)
+            
+def postorder_iterative(self, root):
+    if root is None:
+        return
+    stack = []
+    last_visited = None
+    current = root
+
+    while stack or current:
+        if current:
+            stack.append(current)
+            current = current.left
+        else:
+            peek_node = stack[-1]
+            # If right child exists and traversing node from left child, move to right child
+            if peek_node.right and last_visited != peek_node.right:
+                current = peek_node.right
+            else:
+                print(peek_node.key, end=" ")
+                last_visited = stack.pop()
                     
                     
 # Define Node and BST
