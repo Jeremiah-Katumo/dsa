@@ -1,6 +1,17 @@
 ## Simple Queue Implementation ##
 
 def enqueue(Q, front, rear, MAX, item):
+    '''Function to add an item to the queue
+    Q: queue list
+    front: index of the front of the queue
+    rear: index of the rear of the queue
+    MAX: maximum size of the queue
+    item: item to be added to the queue
+    Returns updated rear and front indices
+    
+    1. If rear is at the last position, print "Queue Overflow" and return rear.
+    2. If both front and rear are -1, set them to 0 and insert the item at Q[rear].
+    3. Otherwise, increment rear and insert the item at Q[rear].'''
     if rear == MAX-1:
         print("Queue Overflow")
         return rear
@@ -15,6 +26,15 @@ def enqueue(Q, front, rear, MAX, item):
         return rear, front
         
 def dequeue(Q, front, rear):
+    '''Function to remove and return an item from the queue
+    Q: queue list
+    front: index of the front of the queue
+    rear: index of the rear of the queue
+    Returns the removed item and updated front and rear indices
+    
+    1. If front is -1, print "Queue Underflow" and return -1, -1, -1.
+    2. If front is equal to rear, store the item at Q[front], set both front and rear to -1, and return the item.
+    3. Otherwise, store the item at Q[front], set Q[front] to 0, increment front, and return the item.'''
     if front == -1:
         print("Queue Underflow")
         return (-1, -1, -1)
@@ -41,6 +61,18 @@ def enqueue(item, Q, front, rear, MAX):
         return rear, front
     
 def enqueue_priority(item, Q, front, rear, MAX):
+    '''Function to add an item to the priority queue
+    Q: queue list
+    front: index of the front of the queue
+    rear: index of the rear of the queue
+    MAX: maximum size of the queue
+    item: item to be added to the queue
+    Returns updated rear and front indices
+    
+    1. If the queue is full, print "Queue Overflow" and return rear.
+    2. If the queue is empty, set front and rear to 0 and insert the item.
+    3. Otherwise, find the correct position for the new item to maintain sorted order.
+       Shift elements as necessary and insert the new item.'''
     if (rear+1)%MAX == front:
         print("Queue Overflow")
         return rear
@@ -97,6 +129,17 @@ def display(Q, front, rear, MAX):
 ## Circular Queue Implementation ##
 
 def circular_enqueue(item, Q, front, rear, MAX):
+    '''Function to add an item to the circular queue
+    Q: queue list
+    front: index of the front of the queue
+    rear: index of the rear of the queue
+    MAX: maximum size of the queue
+    item: item to be added to the queue
+    Returns updated rear and front indices
+    
+    1. If both front and rear are -1, set them to 0 and insert the item at Q[rear].
+    2. If the queue is full, print "Queue Overflow" and return rear and front.
+    3. Otherwise, increment rear circularly and insert the item at Q[rear].'''
     if front == -1 and rear == -1:
         front = 0
         rear = 0
@@ -111,6 +154,16 @@ def circular_enqueue(item, Q, front, rear, MAX):
         return rear, front
     
 def circular_dequeue(Q, front, rear, MAX):
+    '''Function to remove and return an item from the circular queue
+    Q: queue list
+    front: index of the front of the queue
+    rear: index of the rear of the queue
+    MAX: maximum size of the queue
+    Returns the removed item and updated front and rear indices
+    
+    1. If front is -1, print "Queue Underflow" and return -1, -1, -1.
+    2. If front is equal to rear, store the item at Q[front], set both front and rear to -1, and return the item.
+    3. Otherwise, store the item at Q[front], set Q[front] to 0, increment front circular'''
     if front == -1 and rear == -1:
         print("Queue Underflow")
         return (-1, -1, -1)
