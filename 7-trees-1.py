@@ -145,6 +145,23 @@ class BinaryTree1:
             temp = Node(val)
             temp.right = ptr.right
             ptr.right = temp
+            
+    def insertLevelOrder(self, arr, root, i, n):
+        if i < n:
+            temp = Node(arr[i])
+            root = temp
+            root.left = self.insertLevelOrder(arr, root.left, 2 * i + 1, n)
+            root.right = self.insertLevelOrder(arr, root.right, 2 * i + 2, n)
+        return root
+    
+    def deleteLeafNode(self, root, key):
+        if root is None:
+            return None
+        if root.left is None and root.right is None and root.data == key:
+            return None
+        root.left = self.deleteLeafNode(root.left, key)
+        root.right = self.deleteLeafNode(root.right, key)
+        return root
                     
                     
 # Define Node and BST
