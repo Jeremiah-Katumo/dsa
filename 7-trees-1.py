@@ -16,6 +16,9 @@ class Node:
     def setData(self, val):
         self.data = val
         
+    def display(self):
+        print(self.data, end=" ")
+        
 class BinaryTree1:
     def __init__(self, rootData):
         self.root = Node(rootData)
@@ -162,6 +165,9 @@ class Node:
         self.left = None
         self.right = None
         
+    def display(self):
+        print(self.key, end=" ")
+        
 class BinarySearchTree:
     def __init__(self):
         self.root = None
@@ -229,6 +235,11 @@ class BinarySearchTree:
         return root
 
     def minValueNode(self, node):
+        '''Get the node with the minimum key value found in that tree
+            node: current node
+        ALGORITHM:
+        1. Initialize current as the given node.
+        2. Loop down to find the leftmost leaf.'''
         current = node
         while current.left is not None:
             current = current.left
