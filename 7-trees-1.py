@@ -23,6 +23,7 @@ class BinaryTree1:
         
     def preorder_traversal(self, root, trav):
         '''Iterative Preorder Traversal
+        ALGORITHM:
         1. Create an empty stack S and push root to it.
         2. Do the following while S is not empty.
             a. Pop an item from stack and print it.
@@ -48,7 +49,7 @@ class BinaryTree1:
                         
     def inorder_traversal(self, root, trav):
         '''Iterative Inorder Traversal
-        
+        ALGORITHM:
         1. Create an empty stack S.
         2. Initialize current node as root
         3. Push the current node to S and set current = current->left until current is NULL
@@ -73,6 +74,7 @@ class BinaryTree1:
                     
     def postorder_traversal(self, root, trav):
         '''Iterative Postorder Traversal
+        ALGORITHM:
         1. Create an empty stack S.
         2. Initialize current node as root
         3. Push the current node to S and set current = current->left until current is NULL
