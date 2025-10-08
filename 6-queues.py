@@ -8,7 +8,7 @@ def enqueue(Q, front, rear, MAX, item):
     MAX: maximum size of the queue
     item: item to be added to the queue
     Returns updated rear and front indices
-    
+    ALGORITHM:
     1. If rear is at the last position, print "Queue Overflow" and return rear.
     2. If both front and rear are -1, set them to 0 and insert the item at Q[rear].
     3. Otherwise, increment rear and insert the item at Q[rear].'''
@@ -31,7 +31,7 @@ def dequeue(Q, front, rear):
     front: index of the front of the queue
     rear: index of the rear of the queue
     Returns the removed item and updated front and rear indices
-    
+    ALGORITHM:
     1. If front is -1, print "Queue Underflow" and return -1, -1, -1.
     2. If front is equal to rear, store the item at Q[front], set both front and rear to -1, and return the item.
     3. Otherwise, store the item at Q[front], set Q[front] to 0, increment front, and return the item.'''
@@ -68,7 +68,7 @@ def enqueue_priority(item, Q, front, rear, MAX):
     MAX: maximum size of the queue
     item: item to be added to the queue
     Returns updated rear and front indices
-    
+    ALGORITHM:
     1. If the queue is full, print "Queue Overflow" and return rear.
     2. If the queue is empty, set front and rear to 0 and insert the item.
     3. Otherwise, find the correct position for the new item to maintain sorted order.
@@ -136,7 +136,7 @@ def circular_enqueue(item, Q, front, rear, MAX):
     MAX: maximum size of the queue
     item: item to be added to the queue
     Returns updated rear and front indices
-    
+    ALGORITHM:
     1. If both front and rear are -1, set them to 0 and insert the item at Q[rear].
     2. If the queue is full, print "Queue Overflow" and return rear and front.
     3. Otherwise, increment rear circularly and insert the item at Q[rear].'''
@@ -160,7 +160,7 @@ def circular_dequeue(Q, front, rear, MAX):
     rear: index of the rear of the queue
     MAX: maximum size of the queue
     Returns the removed item and updated front and rear indices
-    
+    ALGORITHM:
     1. If front is -1, print "Queue Underflow" and return -1, -1, -1.
     2. If front is equal to rear, store the item at Q[front], set both front and rear to -1, and return the item.
     3. Otherwise, store the item at Q[front], set Q[front] to 0, increment front circular'''
