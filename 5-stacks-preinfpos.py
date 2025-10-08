@@ -22,7 +22,6 @@ class Stack:
     def size(self):
         return len(self.items)
 
-
 class ExpressionConverter:
     """Convert between infix, prefix, and postfix notations"""
     def __init__(self):
@@ -36,9 +35,19 @@ class ExpressionConverter:
     def is_operand(self, char):
         return char.isalnum()
     
-    # INFIX TO POSTFIX
     def infix_to_postfix(self, expression):
-        """Convert infix expression to postfix using stack"""
+        """Convert infix expression to postfix using stack
+        ALGORITHM:
+        1. Initialize an empty stack for operators and an empty list for the output.
+        2. Scan the infix expression from left to right.
+            a. If the character is an operand, append it to the output list.
+            b. If the character is '(', push it onto the stack.
+            c. If the character is ')', pop from the stack to the output 
+                list until '(' is encountered.
+            d. If the character is an operator, pop from the stack to the output list 
+                while the top of the stack has the same or greater precedence (considering associativity), then push the current operator onto the stack.
+        3. After the expression is fully scanned, pop all remaining operators from the stack to the output list.
+        4. Return the output list as a string."""
         stack = Stack()
         postfix = []
         # Scan each character in the expression
@@ -71,9 +80,13 @@ class ExpressionConverter:
         
         return ''.join(postfix)
     
-    # INFIX TO PREFIX
     def infix_to_prefix(self, expression):
-        """Convert infix expression to prefix using stack"""
+        """Convert infix expression to prefix using stack
+        ALGORITHM:
+        1. Reverse the infix expression.
+        2. Replace '(' with ')' and vice versa.
+        3. Convert the modified expression to postfix.
+        4. Reverse the postfix expression to get prefix."""
         # Reverse the expression
         reversed_exp = expression[::-1]
         # Replace ( with ) and vice versa
@@ -92,9 +105,17 @@ class ExpressionConverter:
         # Reverse postfix to get prefix
         return postfix[::-1]
     
-    # POSTFIX TO INFIX
     def postfix_to_infix(self, expression):
-        """Convert postfix expression to infix using stack"""
+        """Convert postfix expression to infix using stack
+        1. Initialize an empty stack.
+        2. Scan the postfix expression from left to right.
+            a. If the character is an operand, push it onto the stack.
+            b. If the character is an operator, pop the top two operands from the stack,
+               combine them with the operator in between and parentheses around, 
+               then push the resulting string back onto the stack.
+        3. After the expression is fully scanned, the stack should contain one element,
+           which is the final infix expression.
+        4. Return the final infix expression."""
         stack = Stack()
         
         for char in expression:
@@ -111,9 +132,17 @@ class ExpressionConverter:
         
         return stack.pop()
     
-    # PREFIX TO INFIX
     def prefix_to_infix(self, expression):
-        """Convert prefix expression to infix using stack"""
+        """Convert prefix expression to infix using stack
+        1. Initialize an empty stack.
+        2. Scan the prefix expression from right to left.
+            a. If the character is an operand, push it onto the stack.
+            b. If the character is an operator, pop the top two operands from the stack,
+               combine them with the operator in between and parentheses around, 
+               then push the resulting string back onto the stack.
+        3. After the expression is fully scanned, the stack should contain one element,
+           which is the final infix expression.
+        4. Return the final infix expression."""
         stack = Stack()
         
         # Read expression from right to left
@@ -132,9 +161,17 @@ class ExpressionConverter:
         
         return stack.pop()
     
-    # POSTFIX TO PREFIX
     def postfix_to_prefix(self, expression):
-        """Convert postfix to prefix using stack"""
+        """Convert postfix to prefix using stack
+        1. Initialize an empty stack.
+        2. Scan the postfix expression from left to right.
+            a. If the character is an operand, push it onto the stack.
+            b. If the character is an operator, pop the top two operands from the stack,
+               combine them with the operator in front, 
+               then push the resulting string back onto the stack.
+        3. After the expression is fully scanned, the stack should contain one element,
+           which is the final prefix expression.
+        4. Return the final prefix expression."""
         stack = Stack()
         
         for char in expression:
@@ -152,9 +189,17 @@ class ExpressionConverter:
         
         return stack.pop()
     
-    # PREFIX TO POSTFIX
     def prefix_to_postfix(self, expression):
-        """Convert prefix to postfix using stack"""
+        """Convert prefix to postfix using stack
+        1. Initialize an empty stack.
+        2. Scan the prefix expression from right to left.
+            a. If the character is an operand, push it onto the stack.
+            b. If the character is an operator, pop the top two operands from the stack,
+               combine them with the operator at the end, 
+               then push the resulting string back onto the stack.
+        3. After the expression is fully scanned, the stack should contain one element,
+           which is the final postfix expression.
+        4. Return the final postfix expression."""
         stack = Stack()
         
         # Read expression from right to left

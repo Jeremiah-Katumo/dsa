@@ -309,6 +309,8 @@ print("Postfix Evaluation of '231*+9-':", evaluate_postfix("231*+9-"))  # Output
 import re
 # ---------- Tokenizer (handles multi-digit and simple unary minus for numbers) ----------
 def tokenize(expr):
+    '''Tokenize the input expression into numbers, variables, operators and parentheses.
+    Handles unary minus for numbers (e.g., -3) but not for variables (e.g., -x).'''
     expr = expr.replace(' ', '')
     # capture floats, ints, names, operators and parentheses
     tokens = re.findall(r'\d+\.\d+|\d+|[A-Za-z]+|[+\-*/^()]', expr)
@@ -333,13 +335,27 @@ def tokenize(expr):
     return res
 
 def is_number(tok):
+    '''Check if token is a number (int or float)'''
     return re.match(r'^-?\d+(\.\d+)?$', tok) is not None
 
 def is_operand(tok):
+    '''Check if token is an operand (number or variable)'''
     return is_number(tok) or re.match(r'^[A-Za-z]+$', tok) is not None
 
 # 1. Infix to Postfix (Shunting Yard) 
 def infix_to_postfix(expr):
+    '''Convert infix expression to postfix using Shunting Yard algorithm.
+    Supports +, -, *, /, ^ operators and parentheses.
+    Handles multi-digit numbers and variables.
+    ALGORITHM:
+    1. Initialize empty stack for operators and empty list for output.
+    2. For each token in the input expression:
+        a. If token is an operand (number/variable), add it to output.
+        b. If token is '(', push it onto stack.
+        c. If token is ')', pop from stack to output until '(' is found.
+        d. If token is an operator, pop from stack to output while top of stack has same or greater precedence (considering associativity), then push current operator.
+    3. After processing all tokens, pop remaining operators from stack to output.
+    4. Return output as a space-separated string.'''
     tokens = tokenize(expr)
     output = []
     stack = []
@@ -373,6 +389,11 @@ def infix_to_postfix(expr):
 
 # 2. Infix to Prefix (via reverse to postfix to reverse) 
 def infix_to_prefix(expr):
+    '''Convert infix expression to prefix.
+    1. Reverse the infix expression.
+    2. Swap '(' with ')' and vice versa.
+    3. Convert the modified expression to postfix.
+    4. Reverse the postfix expression to get prefix.'''
     tokens = tokenize(expr)
     # reverse and swap parens
     rev = []
@@ -390,6 +411,15 @@ def infix_to_prefix(expr):
 
 # 3. Evaluate Postfix 
 def evaluate_postfix(postfix_expr):
+    '''Evaluate a postfix expression.
+    Assumes all operands are numbers (int/float).
+    ALGORITHM:
+    1. Initialize an empty stack.
+    2. For each token in the postfix expression:
+        a. If token is a number, push it onto the stack.
+        b. If token is an operator, pop the top two numbers from the stack, apply the operator, and push the result back onto the stack.
+    3. After processing all tokens, the stack should contain one element, which is the result.
+    4. Return the result.'''
     tokens = postfix_expr.split()
     stack = []
     for tok in tokens:
@@ -415,6 +445,15 @@ def evaluate_postfix(postfix_expr):
 
 # ---------- Evaluate Prefix ----------
 def evaluate_prefix(prefix_expr):
+    '''Evaluate a prefix expression.
+    Assumes all operands are numbers (int/float).
+    ALGORITHM:
+    1. Initialize an empty stack.
+    2. Scan the prefix expression from right to left.
+        a. If token is a number, push it onto the stack.
+        b. If token is an operator, pop the top two numbers from the stack, apply the operator, and push the result back onto the stack.
+    3. After processing all tokens, the stack should contain one element, which is the result.
+    4. Return the result.'''
     tokens = prefix_expr.split()[::-1]  # scan right-to-left
     stack = []
     for tok in tokens:
