@@ -14,6 +14,10 @@ class OneWayLinkedList:
         self.first = OneWayNode(data1)
         
     def insert_beg(self, data):
+        '''Insert a new node at the beginning of the list.
+        ALGORITHM:
+        1. Create a new node with the given data.
+        2. Set the new node's next to the current first node.'''
         temp = OneWayNode(data)
         temp.next = self.first
         self.first = temp
@@ -26,6 +30,14 @@ class OneWayLinkedList:
             ptr = ptr.next
             
     def insert_end(self, data):
+        '''Insert a new node at the end of the list.
+        ALGORITHM:
+        1. Create a new node with the given data.
+        2. If the list is empty, set first to the new node.
+        3. Otherwise, traverse to the last node and set its next to the new node.'''
+        if (self.first == None):
+            self.first = OneWayNode(data)
+            return
         temp = OneWayNode(data)
         ptr = self.first
         while (ptr.next != None):
@@ -34,6 +46,11 @@ class OneWayLinkedList:
         temp.next = None
     
     def insert_after(self, data, data1):
+        '''Insert a new node with 'data' after the node with 'data1'.
+        ALGORITHM:
+        1. Traverse the list to find the node with 'data1'.
+        2. If found, create a new node with 'data' and adjust pointers to insert it after 'data1'.
+        3. If not found, print an error message.'''
         ptr = self.first
         while (ptr != None):
             if (ptr.data == data1):
@@ -60,6 +77,10 @@ class OneWayLinkedList:
     #         temp.next = ptr1
             
     def delete_first(self):
+        '''Delete the first node of the list.
+        ALGORITHM:
+        1. If the list is not empty, set first to first.next.
+        2. If the list is empty, print 'Underflow'.'''
         if (self.first != None):
             temp1 = self.first.data
             self.first = self.first.next
@@ -68,6 +89,11 @@ class OneWayLinkedList:
             print('Underflow')
             
     def delete_end(self):
+        '''Delete the last node of the list.
+        ALGORITHM:
+        1. If the list is empty, print 'Underflow'.
+        2. If the list has only one node, set first to None.
+        3. Otherwise, traverse to the second last node and set its next to None.'''
         ptr = self.first
         if (ptr == None):
             print('Underflow')
@@ -83,6 +109,12 @@ class OneWayLinkedList:
             return temp1
         
     def delete_after(self, data1):
+        '''Delete the node after the node with 'data1'.
+        ALGORITHM:
+        1. Traverse the list to find the node with 'data1'.
+        2. If found and it has a next node, adjust pointers to remove the next node.
+        3. If 'data1' is not found, print an error message.
+        4. If 'data1' is the last node, print a message indicating there's nothing to delete after it.'''
         ptr = self.first
         while (ptr != None):
             if (ptr.data == data1):
@@ -374,11 +406,16 @@ class TwoWayLinkedList:
         self.first = data1
         
     def insert_beg(self, data):
+        '''Insert a new node at the beginning of the list.
+        ALGORITHM:
+        1. Create a new node with the given data.
+        2. Set the new node's next to the current first node.'''
         temp = TwoWayNode(data)
         temp.next = self.first
         self.first = temp
         
     def display(self):
+        '''Display the linked list.'''
         print('List\t:', end=' ')
         ptr = self.first
         while (ptr != None):
@@ -386,6 +423,11 @@ class TwoWayLinkedList:
             ptr = ptr.next
             
     def insert_end(self, data):
+        '''Insert a new node at the end of the list.
+        ALGORITHM:
+        1. Create a new node with the given data.
+        2. If the list is empty, set first to the new node.
+        3. Otherwise, traverse to the last node and set its next to the new node.'''
         temp = TwoWayNode(data)
         ptr = self.first
         while (ptr.next != None):
@@ -394,6 +436,11 @@ class TwoWayLinkedList:
         temp.next = None
         
     def insert_after(self, data, data1):
+        '''Insert a new node with 'data' after the node with 'data1'.
+        ALGORITHM:
+        1. Traverse the list to find the node with 'data1'.
+        2. If found, create a new node with 'data' and adjust pointers to insert it after 'data1'.
+        3. If not found, print an error message.'''
         flag = 0
         temp = TwoWayNode(data)
         ptr = self.first
@@ -412,6 +459,10 @@ class TwoWayLinkedList:
             ptr1.prev = temp
             
     def delete_first(self):
+        '''Delete the first node of the list.
+        ALGORITHM:
+        1. If the list is not empty, set first to first.next.
+        2. If the list is empty, print 'Underflow'.'''
         if (self.first != None):
             temp1 = self.first.data
             self.first = self.first.next
@@ -420,6 +471,11 @@ class TwoWayLinkedList:
             print('Underflow')
             
     def delete_end(self):
+        '''Delete the last node of the list.
+        ALGORITHM:
+        1. If the list is empty, print 'Underflow'.
+        2. If the list has only one node, set first to None.
+        3. Otherwise, traverse to the second last node and set its next to None.'''
         ptr = self.first
         if (ptr == None):
             print('Underflow')
@@ -435,6 +491,12 @@ class TwoWayLinkedList:
             return temp1
         
     def delete_after(self, data1):
+        '''Delete the node after the node with 'data1'.
+        ALGORITHM:
+        1. Traverse the list to find the node with 'data1'.
+        2. If found and it has a next node, adjust pointers to remove the next node.
+        3. If 'data1' is not found, print an error message.
+        4. If 'data1' is the last node, print a message indicating there's nothing to delete after it.'''
         if (self.first == None):
             print('Undeflow')
         else:
@@ -617,6 +679,11 @@ class CircularLinkedList:
         return elements
     
     def insert_beg(self, data):
+        '''Insert a new node at the beginning of the circular linked list.
+        ALGORITHM:
+        1. Create a new node with the given data.
+        2. If the list is empty, set head to the new node and point new node's next to itself.
+        3. Otherwise, traverse to the last node and adjust pointers to insert the new node at the beginning.'''
         node = CircularNode(data)  # create a new node
         if self.head is None:  # if list is empty:
             self.head = node   # make head = node
@@ -630,6 +697,11 @@ class CircularLinkedList:
             self.head = node
             
     def insert_end(self, data):
+        '''Insert a new node at the end of the circular linked list.
+            ALGORITHM:
+            1. Create a new node with the given data.
+            2. If the list is empty, set head to the new node and point new node's next to itself.
+            3. Otherwise, traverse to the last node and adjust pointers to insert the new node at the end.'''
         node = CircularNode(data)
         if self.head is None:
             self.head = node
@@ -642,6 +714,11 @@ class CircularLinkedList:
             node.next = self.head   # point address of new/last node to head
             
     def insert_after(self, key, data):
+        '''Insert a new node with 'data' after the node with 'key'.
+        ALGORITHM:
+        1. Traverse the list to find the node with 'key'.
+        2. If found, create a new node with 'data' and adjust pointers to insert it after 'key'.
+        3. If not found, print an error message.'''
         if self.head is None:       # if list is empty
             print('Underflow')
             return
@@ -658,6 +735,11 @@ class CircularLinkedList:
                 break
             
     def delete_beg(self):
+        '''Delete the first node of the circular linked list.
+        ALGORITHM:
+        1. If the list is empty, print 'Underflow'.
+        2. If the list has a single node, set head to None.
+        3. Otherwise, traverse to the last node and adjust pointers to remove the first node.'''
         if self.head is None:
             print("Underflow")
             return
@@ -671,6 +753,11 @@ class CircularLinkedList:
             self.head = self.head.next
             
     def delete_end(self):
+        '''Delete the last node of the circular linked list.
+        ALGORITHM:
+        1. If the list is empty, print 'Underflow'.
+        2. If the list has a single node, set head to None.
+        3. Otherwise, traverse to the second last node and adjust pointers to remove the last node.'''
         if self.head is None:
             print('Underflow')
             return
@@ -685,6 +772,12 @@ class CircularLinkedList:
             prev.next = self.head
             
     def delete_after(self, key):
+        '''Delete the node after the node with 'key'.
+        ALGORITHM:
+        1. Traverse the list to find the node with 'key'.
+        2. If found and it has a next node, adjust pointers to remove the next node.
+        3. If 'key' is not found, print an error message.
+        4. If 'key' is the last node, print a message indicating there's nothing to delete after it.'''
         if self.head is None:
             print('Underflow')
             return
@@ -745,6 +838,11 @@ class StackList:
         print()
             
     def insert_end(self, data):
+        '''Insert a new node at the end of the list.
+        ALGORITHM:
+        1. Create a new node with the given data.
+        2. If the list is empty, set first to the new node.
+        3. Otherwise, traverse to the last node and set its next to the new node.'''
         temp = StackNode(data)
         ptr = self.first
         while (ptr.next != None):
@@ -753,6 +851,11 @@ class StackList:
         temp.next = None
     
     def delete_end(self):
+        '''Delete the last node of the list.
+        ALGORITHM:
+        1. If the list is empty, print 'Underflow'.
+        2. If the list has only one node, set first to None.
+        3. Otherwise, traverse to the second last node and set its next to None.'''
         ptr = self.first
         if (ptr == None):
             print('Underflow')
@@ -838,6 +941,7 @@ class QueueList:
         self.first = QueueNode(data1)
         
     def display(self):
+        '''Display the linked list.'''
         print('List\\t:' , end=' ')
         ptr = self.first
         while (ptr != None):
@@ -846,6 +950,11 @@ class QueueList:
         print()
     
     def insert_end(self, data):
+        '''Insert a new node at the end of the list.
+        ALGORITHM:
+        1. Create a new node with the given data.
+        2. If the list is empty, set first to the new node.
+        3. Otherwise, traverse to the last node and set its next to the new node.'''
         temp = QueueNode(data)
         ptr = self.first
         while (ptr.next != None):
@@ -853,6 +962,10 @@ class QueueList:
         temp.next = None
         
     def delete_beg(self):
+        '''Delete the first node of the list.
+        ALGORITHM:
+        1. If the list is not empty, set first to first.next.
+        2. If the list is empty, print 'Underflow'.'''
         if (self.first != None):
             temp1 = self.first.data
             self.first = self.first.next
@@ -861,6 +974,12 @@ class QueueList:
             print('Underflow')
 
     def reverse_list(list1):
+        '''Reverse the linked list.
+        ALGORITHM:
+        1. If the list is empty or has only one node, return the list as is.
+        2. Initialize three pointers: prev (None), current (first node), next (second node).
+        3. Iterate through the list, reversing the next pointer of each node.
+        4. Update the first pointer to point to the new head of the reversed list.'''
         if ((list1.first == None) or (list1.first.next == None)):
             return list1
         else:
@@ -879,6 +998,16 @@ class QueueList:
             return list1
         
     def concatenate_list(self, list1, list2):
+        '''Concatenate two linked lists.
+        ALGORITHM:
+        1. If the first list is empty, set its first to the second list's first.
+        2. If the second list is empty, do nothing.
+        3. Otherwise, traverse to the end of the first list and link it to the second list's first.'''
+        if (list1.first == None):
+            list1.first = list2.first
+            return
+        if (list2.first == None):
+            return
         temp1 = StackNode(list1)
         temp2 = StackNode(list2)
         ptr = temp1.first
@@ -887,6 +1016,12 @@ class QueueList:
         ptr.next = temp2.first
         
     def check_cycle(self, list1):
+        '''Check if the linked list has a cycle.
+        ALGORITHM:
+        1. Use a set to keep track of visited nodes.
+        2. Traverse the list, adding each node to the set.
+        3. If a node is encountered that is already in the set, a cycle exists.
+        4. If the end of the list is reached (None), no cycle exists.'''
         links = set()
         temp = StackNode(list1)
         ptr = self.first
