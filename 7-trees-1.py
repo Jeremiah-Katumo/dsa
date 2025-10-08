@@ -1,58 +1,3 @@
-def insert(self, root, key):
-    if root is None:
-        return Node(key)
-    if key < root.key:
-        root.left = self.insert(root.left, key)
-    elif key > root.key:
-        root.right = self.insert(root.right, key)
-    return root
-
-def search(self, root, key):
-    if root is None or root.key == key:
-        return root
-    if key < root.key:
-        return self.search(root.left, key)
-    else:
-        return self.search(root.right, key)
-
-def delete(self, root, key):
-    if root is None:
-        return root
-    if key < root.key:
-        root.left = self.delete(root.left, key)
-    elif key > root.key:
-        root.right = self.delete(root.right, key)
-    else:
-        # Node found
-        if root.left is None:
-            return root.right
-        elif root.right is None:
-            return root.left
-
-        successor = self.minValueNode(root.right)
-        root.key = successor.key
-        root.right = self.delete(root.right, successor.key)
-    return root
-
-def minValueNode(self, node):
-    current = node
-    while current.left is not None:
-        current = current.left
-    return current
-
-def inorder(self, root):
-    if root:
-        self.inorder(root.left)
-        print(root.key, end=" ")
-        self.inorder(root.right)
-
-def preorder(self, root):
-    if root:
-        print(root.key, end=" ")
-        self.preorder(root.left)
-        self.preorder(root.right)
-
-
 class Node:
     def __init__(self, data):
         self.left = None
@@ -77,21 +22,41 @@ class BinaryTree1:
         self.level = 0
         
     def preorder_traversal(self, root, trav):
+        '''Iterative Preorder Traversal
+        1. Create an empty stack S and push root to it.
+        2. Do the following while S is not empty.
+            a. Pop an item from stack and print it.
+            b. Push right child of popped item to S
+            c. Push left child of popped item to S
+            Note that right child is pushed first so that left is processed first'''
         if root == None:
             return
         else:
             stack_pre = []
             stack_pre.append(root)
             while stack_pre:
-                ptr = stack_pre.pop()
-                trav.append(ptr.data)
+                ptr = stack_pre.pop()  # Pop/dequeue the top/front node
+                trav.append(ptr.data)  # Process the node
                 if ptr:
-                    if ptr.right != None:
+                    if ptr.left == None and ptr.right == None:
+                        print("Leaf Node:", ptr.data)
+                        continue
+                    if ptr.right != None:  # Push/enqueue right child first so that left is processed first
                         stack_pre.append(ptr.right)
                     if ptr.left != None:
                         stack_pre.append(ptr.left)
                         
     def inorder_traversal(self, root, trav):
+        '''Iterative Inorder Traversal
+        
+        1. Create an empty stack S.
+        2. Initialize current node as root
+        3. Push the current node to S and set current = current->left until current is NULL
+        4. If current is NULL and stack is not empty then
+            a. Pop the top item from stack.
+            b. Print the popped item, set current = popped_item->right
+            c. Go to step 3.
+        5. If current is NULL and stack is empty then we are done.'''
         if root == None:
             return
         else:
@@ -107,6 +72,19 @@ class BinaryTree1:
                     ptr = ptr.right
                     
     def postorder_traversal(self, root, trav):
+        '''Iterative Postorder Traversal
+        1. Create an empty stack S.
+        2. Initialize current node as root
+        3. Push the current node to S and set current = current->left until current is NULL
+        4. If current is NULL and stack is not empty then
+            a. Pop the top item from stack.
+            b. If the popped item has a right child and the right child is not processed yet then
+                i. Push the popped item back to stack.
+                ii. Set current = popped_item->right
+            c. Else
+                i. Print the popped item and set current = NULL
+            d. Go to step 3.
+        5. If current is NULL and stack is empty then we are done.'''
         if root == None:
             return
         else:
@@ -129,6 +107,8 @@ class BinaryTree1:
                     ptr = None
                     
     def insertLeft(self, val):
+        '''Insert a node as the left child of the root. If the left child 
+        already exists, push it down as the left child of the new node.'''
         ptr = self.root
         if ptr.left == None:
             ptr.left = Node(val)
@@ -138,6 +118,8 @@ class BinaryTree1:
             ptr.left = temp
             
     def insertRight(self, val):
+        '''Insert a node as the right child of the root. If the right child
+        already exists, push it down as the right child of the new node.'''
         ptr = self.root
         if ptr.right == None:
             ptr.right = Node(val)
@@ -147,6 +129,11 @@ class BinaryTree1:
             ptr.right = temp
             
     def insertLevelOrder(self, arr, root, i, n):
+        '''Function to insert nodes in level order
+        arr: input array
+        root: current root of the binary tree
+        i: current index in the array
+        n: size of the array'''
         if i < n:
             temp = Node(arr[i])
             root = temp
@@ -155,6 +142,9 @@ class BinaryTree1:
         return root
     
     def deleteLeafNode(self, root, key):
+        '''Function to delete a leaf node with a given key
+        root: current root of the binary tree
+        key: value of the leaf node to be deleted'''
         if root is None:
             return None
         if root.left is None and root.right is None and root.data == key:
@@ -162,6 +152,71 @@ class BinaryTree1:
         root.left = self.deleteLeafNode(root.left, key)
         root.right = self.deleteLeafNode(root.right, key)
         return root
+
+
+class Node:
+    def __init__(self, key):
+        self.key = key
+        self.left = None
+        self.right = None
+        
+class BinarySearchTree:
+    def __init__(self):
+        self.root = None
+        
+    def insert(self, root, key):
+        if root is None:
+            return Node(key)
+        if key < root.key:
+            root.left = self.insert(root.left, key)
+        elif key > root.key:
+            root.right = self.insert(root.right, key)
+        return root
+
+    def search(self, root, key):
+        if root is None or root.key == key:
+            return root
+        if key < root.key:
+            return self.search(root.left, key)
+        else:
+            return self.search(root.right, key)
+
+    def delete(self, root, key):
+        if root is None:
+            return root
+        if key < root.key:
+            root.left = self.delete(root.left, key)
+        elif key > root.key:
+            root.right = self.delete(root.right, key)
+        else:
+            # Node found
+            if root.left is None:
+                return root.right
+            elif root.right is None:
+                return root.left
+
+            successor = self.minValueNode(root.right)
+            root.key = successor.key
+            root.right = self.delete(root.right, successor.key)
+        return root
+
+    def minValueNode(self, node):
+        current = node
+        while current.left is not None:
+            current = current.left
+        return current
+
+    def inorder(self, root):
+        if root:
+            self.inorder(root.left)
+            print(root.key, end=" ")
+            self.inorder(root.right)
+
+    def preorder(self, root):
+        if root:
+            print(root.key, end=" ")
+            self.preorder(root.left)
+            self.preorder(root.right)
                     
                     
 # Define Node and BST
