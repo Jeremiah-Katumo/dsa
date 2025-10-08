@@ -167,6 +167,13 @@ class BinarySearchTree:
         self.root = None
         
     def insert(self, root, key):
+        '''Insert a node with the given key into the BST
+            root: current root of the BST
+            key: value to be inserted
+        ALGORITHM:
+        1. If the tree is empty, return a new node.
+        2. Otherwise, recur down the tree.
+        3. Return the (unchanged) node pointer.'''
         if root is None:
             return Node(key)
         if key < root.key:
@@ -176,6 +183,13 @@ class BinarySearchTree:
         return root
 
     def search(self, root, key):
+        '''Search for a node with the given key in the BST
+            root: current root of the BST
+            key: value to be searched
+        ALGORITHM:
+        1. Base Cases: root is null or key is present at root 
+        2. Key is greater than root's key so search in right subtree
+        3. Key is smaller than root's key so search in left subtree'''
         if root is None or root.key == key:
             return root
         if key < root.key:
@@ -184,6 +198,18 @@ class BinarySearchTree:
             return self.search(root.right, key)
 
     def delete(self, root, key):
+        '''Delete a node with the given key from the BST
+            root: current root of the BST
+            key: value to be deleted
+        ALGORITHM:
+        1. If the tree is empty, return root.
+        2. Otherwise, recur down the tree.
+        3. If the key is the same as root's key, then this is the node to be deleted.
+        4. If the key is smaller than root's key, then it lies in left subtree.
+        5. If the key is larger than root's key, then it lies in right subtree.
+        6. If the node has only one child or no child, then replace the node with its child.
+        7. If the node has two children, then find the inorder successor (smallest in the right subtree),
+           copy the inorder successor's content to this node and delete the inorder successor.'''
         if root is None:
             return root
         if key < root.key:
