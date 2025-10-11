@@ -29,8 +29,55 @@ class MaxHeap:
         ALGORITHM:
         1. Add the new value at the end of the heap.
         2. Heapify up from the last index to restore the heap property.'''
-        self.heap.append(val)
-        self.heapify_up(len(self.heap) - 1)
+        heap = self.heap
+        if heap[0] == 0:
+            heap[0] == val
+        else:
+            index = 0
+            while heap[index] != 0:
+                index += 1
+            heap[index] = val
+            pos = index
+            while pos != 0:
+                if (heap[(pos - 1) // 2] < heap[pos]):
+                    temp = heap[pos]
+                    heap[pos] = heap[(pos - 1) // 2]
+                    heap[(pos - 1) // 2] = temp
+                    pos = (pos - 1) // 2
+                else:
+                    break
+        # self.heap.append(val)
+        # self.heapify_up(len(self.heap) - 1)
+        
+    def delete(self):
+        '''Delete a node from a heap'''
+        index = 0
+        heap = self.heap
+        
+        while heap[index] != 0:
+            temp = heap[index]
+            index1 = index
+            index += 1
+        if index1 == 0:
+            temp1 = heap[0]
+            heap[0] = 0
+        else:
+            temp1 = heap[0]
+            heap[0] = temp
+            pos = 0
+            print(index1)
+            
+            while pos != index1:
+                if (heap[pos] < heap[2 * pos + 1]):
+                    heap[pos], heap[2 * pos + 1] = heap[2 * pos + 1], heap[pos]
+                    pos = 2 * pos + 1
+                    print(pos)
+                elif (heap[pos] < heap[2 * pos + 2]):
+                    heap[pos], heap[2 * pos + 2] = heap[2 * pos + 2], heap[pos]
+                    pos = 2 * pos + 2
+                    print(pos)
+                    
+            return temp1
 
     def heapify_up(self, i):
         '''Heapify up the value at index i to restore the max heap property
@@ -46,7 +93,7 @@ class MaxHeap:
         '''Extract and return the maximum value from the max heap
         ALGORITHM:
         1. If the heap is empty, return None.
-        2. If the heap has only one element, remove and return it.
+        2. If the heap h as only one element, remove and return it.
         3. Store the root value to be returned later.
         4. Move the last element to the root and remove the last element.
         5. Heapify down from the root to restore the heap property.'''

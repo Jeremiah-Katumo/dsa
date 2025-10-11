@@ -256,7 +256,7 @@ print(f"Iterative Approach: {elapsed}")
 def find_product(arr, n):
     prod1 = 1
     for i in range(n):
-        prod1 *= arr[1]
+        prod1 *= arr[i]
     return prod1
 
 def linear_search(arr, n, item):
