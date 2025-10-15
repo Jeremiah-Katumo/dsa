@@ -530,7 +530,7 @@ class Node:
 
 class DoublyLinkedList:
     def __init__(self):
-        self.head = None
+        self.head = Node(None)
 
     # Display list forward
     def display(self):

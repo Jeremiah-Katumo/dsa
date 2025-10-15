@@ -707,3 +707,22 @@ if __name__ == "__main__":
     for i, chunk in enumerate(chunks, 1):
         print(f"\n--- Chunk {i} ({len(chunk.split())} words) ---\n")
         print(chunk)
+
+def reverse_hour_minutes(num):
+    if num == 0:
+        reversed = f"{num}:{num}"
+        return reversed
+    
+    # checkup_list = [6,7,8,9,16,17,18,19]
+    for i in range(1, 24):
+        reversed = int(str(num)[::-1])
+        if len(reversed) == 1:
+            reversed_result = f"{"0" + str(num)}:{str(reversed) + "0"}"
+            return reversed_result
+        else:
+            reversed_result = f"{num}:{reversed}"
+            
+    return reversed_result
+
+reverse_hour_minutes(24)
+    
