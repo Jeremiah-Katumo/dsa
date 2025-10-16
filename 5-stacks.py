@@ -487,3 +487,150 @@ if __name__ == "__main__":
     print("Prefix: ", prefix)
     print("Eval Postfix:", evaluate_postfix(postfix))
     print("Eval Prefix: ", evaluate_prefix(prefix))
+
+
+## Queues from stack: Method 1 ##
+
+def push1(stack1, top1, item, max1):
+    """Push an element into stack1 if not full"""
+    if top1 == max1 - 1:
+        print("Overflow: Stack is full")
+        return stack1, top1
+    else:
+        top1 += 1
+        stack1.append(item)
+        return stack1, top1
+
+def pop1(stack1, stack2, top1, max1):
+    """Pop element from stack1 using stack2 (FIFO behavior)"""
+    if top1 == -1:
+        print("Underflow: Stack is empty")
+        return stack1, top1, -2
+
+    elif top1 == 0:
+        val = stack1.pop()
+        top1 -= 1
+        return stack1, top1, val
+
+    else:
+        top2 = -1
+        # Move all elements from stack1 → stack2
+        while top1 != -1:
+            val = stack1.pop()
+            stack2.append(val)
+            top1 -= 1
+            top2 += 1
+        
+        # Pop element from stack2 (front of queue)
+        val = stack2.pop()
+        top2 -= 1
+
+        # Move remaining elements back to stack1
+        while top2 != -1:
+            temp = stack2.pop()
+            stack1.append(temp)
+            top1 += 1
+            top2 -= 1
+
+        return stack1, top1, val
+
+def init():
+    """Initialize stacks and parameters"""
+    stack1 = []
+    stack2 = []
+    MAX = 5
+    top1 = -1
+    top2 = -1
+    return stack1, stack2, top1, top2, MAX
+
+# Initialize
+stack1, stack2, top1, top2, MAX = init()
+
+# Push elements
+stack1, top1 = push1(stack1, top1, 10, MAX)
+stack1, top1 = push1(stack1, top1, 20, MAX)
+stack1, top1 = push1(stack1, top1, 30, MAX)
+
+print("Stack1 after pushes:", stack1)
+
+# Pop elements (FIFO order)
+stack1, top1, val = pop1(stack1, stack2, top1, MAX)
+print("Popped value:", val)
+print("Stack1 after pop:", stack1)
+
+stack1, top1, val = pop1(stack1, stack2, top1, MAX)
+print("Popped value:", val)
+print("Stack1 after pop:", stack1)
+
+
+## Queues from stack: Method 2 ##
+
+def push1(stack1, stack2, top1, top2, max1, item):
+    """Push into queue using two stacks (costly push method)"""
+    if top1 == max1 - 1:
+        print("Overflow: Queue is full")
+        return stack1, stack2, top1, top2
+
+    # Case 1: First element
+    if top1 == -1:
+        stack1.append(item)
+        top1 += 1
+
+    else:
+        # Move all elements from stack1 → stack2
+        while top1 != -1:
+            temp = stack1.pop()
+            stack2.append(temp)
+            top1 -= 1
+            top2 += 1
+
+        # Push new element to stack1
+        stack1.append(item)
+        top1 += 1
+
+        # Move everything back to stack1 from stack2
+        while top2 != -1:
+            temp = stack2.pop()
+            stack1.append(temp)
+            top1 += 1
+            top2 -= 1
+
+    return stack1, stack2, top1, top2
+
+def pop1(stack1, top1, max1):
+    """Pop from queue (simple operation)"""
+    if top1 == -1:
+        print("Underflow: Queue is empty")
+        return stack1, top1, None
+    else:
+        temp = stack1.pop()
+        top1 -= 1
+        return stack1, top1, temp
+
+def init():
+    """Initialize two stacks and control variables"""
+    stack1 = []
+    stack2 = []
+    MAX = 5
+    top1 = -1
+    top2 = -1
+    return stack1, stack2, top1, top2, MAX
+
+# Initialize
+stack1, stack2, top1, top2, MAX = init()
+
+# Enqueue operations
+stack1, stack2, top1, top2 = push1(stack1, stack2, top1, top2, MAX, 10)
+stack1, stack2, top1, top2 = push1(stack1, stack2, top1, top2, MAX, 20)
+stack1, stack2, top1, top2 = push1(stack1, stack2, top1, top2, MAX, 30)
+
+print("Queue (in stack1):", stack1)
+
+# Dequeue operations
+stack1, top1, val = pop1(stack1, top1, MAX)
+print("Dequeued:", val)
+print("Queue after dequeue:", stack1)
+
+stack1, top1, val = pop1(stack1, top1, MAX)
+print("Dequeued:", val)
+print("Queue after dequeue:", stack1)
