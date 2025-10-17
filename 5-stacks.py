@@ -387,6 +387,8 @@ def infix_to_postfix(expr):
         output.append(op)
     return ' '.join(output)
 
+print("Infix to postfix: ", infix_to_postfix("(5*(6+2))-(12/4)"))
+
 # 2. Infix to Prefix (via reverse to postfix to reverse) 
 def infix_to_prefix(expr):
     '''Convert infix expression to prefix.
