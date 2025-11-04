@@ -64,8 +64,8 @@ class BinaryTree1:
         if root == None:
             return
         else:
-            stack_in = []
-            ptr = root
+            stack_in = []   # Create an empty stack S.
+            ptr = root      # Initialize current node as root
             while stack_in or ptr:
                 if ptr != None:
                     stack_in.append(ptr)
