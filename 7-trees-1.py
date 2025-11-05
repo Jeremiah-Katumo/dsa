@@ -396,7 +396,7 @@ class BinarySearchTree:
 
     def delete(self, root, key):
         if root is None:
-            return root
+            return "Tree is empty"
         if key < root.key:
             root.left = self.delete(root.left, key)
         elif key > root.key:
