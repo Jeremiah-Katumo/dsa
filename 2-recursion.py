@@ -81,8 +81,8 @@ def reverse(listt):
     else:
         return [listt[-1]] + reverse(listt[:-1])
     
-listt = [4,5,6,7,8]
-print(f"Reversed List: {reverse(listt)}")
+mylist = [4,5,6,7,8]
+print(f"Reversed List: {reverse(mylist)}")
 
 def find_max(listt):
     if (len(listt) == 1):
@@ -91,7 +91,7 @@ def find_max(listt):
         rest = find_max(listt[1:])
         return listt[0] if listt[0] > rest else rest
     
-print(f"Maximum Number: {find_max(listt)}")
+print(f"Maximum Number: {find_max(mylist)}")
 
 ## Reverse Numbers ##
 def digits(num):
@@ -157,8 +157,8 @@ def sum_natural(n):
     return n + sum_natural(n - 1)
 
 # Example usage
-n = 10
-print("Sum of first", n, "natural numbers is:", sum_natural(n))
+nlength = 10
+print("Sum of first", nlength, "natural numbers is:", sum_natural(nlength))
 
 
 # Find the first n terms of the Fibonacci series using recursion.
@@ -174,7 +174,7 @@ def fibonacci_series(n):
         seq.append(seq[-1] + seq[-2])
         return seq
     
-def fibonacci(n):
+def fibonacci_two(n):
     # Base cases
     if n == 0:
         return 0
@@ -182,24 +182,24 @@ def fibonacci(n):
         return 1
     # Recursive step
     else:
-        return fibonacci(n - 1) + fibonacci(n - 2)
+        return fibonacci_two(n - 1) + fibonacci_two(n - 2)
 
-def fibonacci_series(n):
+def fibonacci_series_two(n):
     series = []
     for i in range(n):
-        series.append(fibonacci(i))
+        series.append(fibonacci_two(i))
     return series
 
 # Example usage
-n = 10
-print("First", n, "terms of Fibonacci series:", fibonacci_series(n))
+nlength = 10
+print("First", nlength, "terms of Fibonacci series:", fibonacci_series_two(nlength))
 
 
-def find_max(listt):
+def find_max_two(listt):
     if (len(listt) == 1):
         return listt[0]
     else:
-        rest = find_max(listt[1:])
+        rest = find_max_two(listt[1:])
         return listt[0] if listt[0] > rest else rest
     
 def find_min(listt):
@@ -241,14 +241,14 @@ def sum_of_digits(n):
     
 print(f"Sum of Digits: {sum_of_digits(12345)}")
 
-def reverse_number(n, rev=0):
+def reverse_number_two(n, rev=0):
     if n == 0:
         return rev
     else:
         rev = (rev * 10) + (n % 10)
-        return reverse_number(n // 10, rev)
+        return reverse_number_two(n // 10, rev)
     
-print(f"Reversed Number: {reverse_number(12345)}")
+print(f"Reversed Number: {reverse_number_two(12345)}")
 
 def gcd(a, b):
     if b == 0:
@@ -264,9 +264,9 @@ def min_sum_list(L, n):
     else:
         return L[n-1] + min_sum_list(L, n-1)
     
-L = [3,5,2,8,1]
-n = len(L)
-print(f"Sum of List: {min_sum_list(L, n)}")
+myList = [3,5,2,8,1]
+nlength = len(myList)
+print(f"Sum of List: {min_sum_list(myList, nlength)}")
 
 def Min_sum_list(listt):
     return min(listt, key=lambda x: x if x > 0 else sys.maxsize)

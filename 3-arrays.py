@@ -6,16 +6,16 @@ import random
 
 max = 50
 
-def insert_beginning(arr, n, item):
+def insert_beg(arr, n, item):
     if n != max:
         i = n - 1
         while (i >= 0 and arr[i] > item):
             arr[i + 1] = arr[i]
             i -= 1
         arr[i + 1] = item
-        insert_beginning(arr, n + 1, item)
+        insert_beg(arr, n + 1, item)
         
-def insert_beg(arr, n, item):
+def insert_beg2(arr, n, item):
     if n != max:
         i = n - 1
         while (i > 0):
@@ -93,27 +93,27 @@ def insert_beginning(arr, item):
         return arr
     return [item] + arr
 
-def insert_end(arr, item):
+def insert_end_two(arr, item):
     if len(arr) >= max_size:
         print('Overflow')
         return arr
     arr.append(item)
     return arr
 
-def delete_beg(arr):
+def delete_beg_two(arr):
     if not arr:
         print('Underflow')
         return arr
     return arr[1:]
 
-def delete_end(arr):
+def delete_end_two(arr):
     if not arr:
         print('Underflow')
         return arr
     arr.pop()
     return arr
 
-def delete_after(arr, item):
+def delete_after_two(arr, item):
     if not arr:
         print('Underflow')
         return arr
@@ -210,7 +210,7 @@ def Find_max(listt):
     if (len(listt) == 1):
         return listt[0]
     else:
-        rest = find_max(listt[:1])
+        rest = Find_max(listt[:1])
         return listt[0] if listt[0] > rest else rest
 
 def find_min(arr, n):
@@ -224,7 +224,7 @@ def Find_min(listt):
     if (len(listt) == 1):
         return listt[0]
     else:
-        rest = find_max(listt[:1])
+        rest = Find_min(listt[:1])
         return listt[0] if listt[0] < rest else rest
     
 def recursive_sum(arr, n):
@@ -274,7 +274,7 @@ def Linear_search(listt, item):
         idx = Linear_search(listt[1:], item)
         return idx + 1 if idx != -1 else -1
     
-def linear_search(arr, n, item):
+def linear_search_two(arr, n, item):
     indices = []
     for i in range(n):
         if arr[i] == item:
@@ -331,7 +331,7 @@ def find_mode(arr, n):
             freq[arr[i]] += 1
         else:
             freq[arr[i]] = 1
-    mode1 = max(freq, key=freq.get)
+    mode1 = np.max(freq, key=freq.get)
     return mode1
 
 def Find_mode(listt):
@@ -341,7 +341,7 @@ def Find_mode(listt):
             freq[listt[i]] += 1
         else:
             freq[listt[i]] = 1
-    mode1 = max(freq, key=freq.get)
+    mode1 = np.max(freq, key=freq.get)
     return mode1
 
 def find_quartiles(arr, n):
@@ -600,7 +600,7 @@ def frequency_count(arr):
             freq[num] = 1
     return freq
 
-def frequency_count(arr):
+def frequency_count_two(arr):
     counts = {}
     for num in arr:
         if num in counts:
