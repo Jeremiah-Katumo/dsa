@@ -611,7 +611,7 @@ if __name__ == '__main__':
     print("Tree after inserts:")
     print(bt.traverse())
 
-    print("Search 17:", bt.search(17) is not None)
+    print("Search 17:", bt.search(17, None) is not None)
     print("Delete 6")
     bt.delete(6)
     print(bt.traverse())

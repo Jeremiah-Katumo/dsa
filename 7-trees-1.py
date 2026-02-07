@@ -159,7 +159,7 @@ class BinaryTree1:
         return root
 
 
-class Node:
+class NodeTwo:
     def __init__(self, key):
         self.key = key
         self.left = None
@@ -181,7 +181,7 @@ class BinarySearchTree:
         2. Otherwise, recur down the tree.
         3. Return the (unchanged) node pointer.'''
         if root is None:
-            return Node(key)
+            return NodeTwo(key)
         if key < root.key:
             root.left = self.insert(root.left, key)
         elif key > root.key:
@@ -259,7 +259,10 @@ class BinarySearchTree:
             
             
 ## Implement alternative to Binary Tree Traversal using Recursion and Iteration ##
-class Node:
+class BTNode:
+    '''
+    Docstring for Node
+    '''
     def __init__(self, key):
         self.key = key
         self.left = None
@@ -343,19 +346,19 @@ def postorder_iterative(self, root):
                     
                     
 # Define Node and BST
-class Node:
+class BSTNode:
     def __init__(self, key):
         self.key = key
         self.left = None
         self.right = None
 
-class BinarySearchTree:
+class BSearchTree:
     def __init__(self):
         self.root = None
 
     def insert(self, root, key):
         if root is None:
-            return Node(key)
+            return BSTNode(key)
         if key < root.key:
             root.left = self.insert(root.left, key)
         elif key > root.key:
@@ -413,7 +416,7 @@ class BinarySearchTree:
 
 
 # --- Example Usage ---
-bst = BinarySearchTree()
+bst = BSearchTree()
 root = None
 
 # Insert nodes
@@ -437,9 +440,9 @@ print("\nAfter deleting 70 (Inorder): ")
 bst.inorder(root)  # Output: 20 30 40 50 60 80
 
 
-class BinaryTree:
+class BinaryTreeOne:
     def __init__(self, root):
-        self.root = Node(root)
+        self.root = BTNode(root)
 
     def print_tree(self, traversal_type):
         if traversal_type == "preorder":
@@ -474,13 +477,13 @@ class BinaryTree:
         return traversal
     
 ## Binary Search Tree Implementation with Insert, Search, Delete, and Traversal Methods
-class BinarySearchTree:
+class BinarySearchTreeOne:
     def __init__(self):
         self.root = None
 
     def insert(self, root, key):
         if root is None:
-            return Node(key)
+            return BSTNode(key)
         if key < root.key:
             root.left = self.insert(root.left, key)
         elif key > root.key:
